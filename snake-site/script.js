@@ -1,0 +1,193 @@
+const canvas = document.getElementById("game");
+const ctx = canvas.getContext("2d");
+const scoreEl = document.getElementById("score");
+const bestEl = document.getElementById("best");
+const statusEl = document.getElementById("status");
+
+const gridSize = 20;
+const tileCount = canvas.width / gridSize;
+const speed = 120;
+
+let snake;
+let direction;
+let nextDirection;
+let food;
+let score;
+let running;
+let paused;
+let gameLoop;
+
+const bestScoreKey = "snake_best_score";
+const savedBest = Number(localStorage.getItem(bestScoreKey) || 0);
+bestEl.textContent = savedBest;
+
+function randomPosition() {
+  return {
+    x: Math.floor(Math.random() * tileCount),
+    y: Math.floor(Math.random() * tileCount),
+  };
+}
+
+function placeFood() {
+  do {
+    food = randomPosition();
+  } while (snake.some(segment => segment.x === food.x && segment.y === food.y));
+}
+
+function resetGame() {
+  snake = [
+    { x: 10, y: 10 },
+    { x: 9, y: 10 },
+    { x: 8, y: 10 },
+  ];
+  direction = { x: 1, y: 0 };
+  nextDirection = { x: 1, y: 0 };
+  score = 0;
+  running = false;
+  paused = false;
+  scoreEl.textContent = score;
+  statusEl.textContent = "点击画面或按方向键开始";
+  placeFood();
+  draw();
+  stopLoop();
+}
+
+function startGame() {
+  if (running) return;
+  running = true;
+  paused = false;
+  statusEl.textContent = "游戏中";
+  stopLoop();
+  gameLoop = setInterval(update, speed);
+}
+
+function stopLoop() {
+  if (gameLoop) {
+    clearInterval(gameLoop);
+    gameLoop = null;
+  }
+}
+
+function pauseGame() {
+  if (!running) return;
+  paused = !paused;
+  statusEl.textContent = paused ? "已暂停，按空格继续" : "游戏中";
+}
+
+function update() {
+  if (paused) return;
+
+  direction = nextDirection;
+  const head = {
+    x: snake[0].x + direction.x,
+    y: snake[0].y + direction.y,
+  };
+
+  const hitWall = head.x < 0 || head.x >= tileCount || head.y < 0 || head.y >= tileCount;
+  const hitSelf = snake.some(segment => segment.x === head.x && segment.y === head.y);
+
+  if (hitWall || hitSelf) {
+    gameOver();
+    return;
+  }
+
+  snake.unshift(head);
+
+  if (head.x === food.x && head.y === food.y) {
+    score += 1;
+    scoreEl.textContent = score;
+    const best = Math.max(score, Number(localStorage.getItem(bestScoreKey) || 0));
+    localStorage.setItem(bestScoreKey, best);
+    bestEl.textContent = best;
+    placeFood();
+  } else {
+    snake.pop();
+  }
+
+  draw();
+}
+
+function gameOver() {
+  running = false;
+  stopLoop();
+  statusEl.textContent = `游戏结束，得分 ${score}。按回车重新开始`;
+  draw(true);
+}
+
+function draw(gameOverState = false) {
+  ctx.fillStyle = "#020617";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  for (let i = 0; i < tileCount; i++) {
+    for (let j = 0; j < tileCount; j++) {
+      ctx.fillStyle = (i + j) % 2 === 0 ? "#0f172a" : "#111827";
+      ctx.fillRect(i * gridSize, j * gridSize, gridSize - 1, gridSize - 1);
+    }
+  }
+
+  ctx.fillStyle = "#ef4444";
+  ctx.beginPath();
+  ctx.arc(food.x * gridSize + gridSize / 2, food.y * gridSize + gridSize / 2, gridSize / 2.5, 0, Math.PI * 2);
+  ctx.fill();
+
+  snake.forEach((segment, index) => {
+    ctx.fillStyle = index === 0 ? "#22c55e" : "#16a34a";
+    ctx.fillRect(segment.x * gridSize + 1, segment.y * gridSize + 1, gridSize - 2, gridSize - 2);
+  });
+
+  if (gameOverState) {
+    ctx.fillStyle = "rgba(0,0,0,0.45)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "#f8fafc";
+    ctx.font = "bold 32px Microsoft YaHei";
+    ctx.textAlign = "center";
+    ctx.fillText("游戏结束", canvas.width / 2, canvas.height / 2);
+  }
+}
+
+function setDirection(x, y) {
+  if (!running) startGame();
+  if (x === -direction.x && y === -direction.y) return;
+  nextDirection = { x, y };
+}
+
+document.addEventListener("keydown", (event) => {
+  switch (event.key) {
+    case "ArrowUp":
+    case "w":
+    case "W":
+      setDirection(0, -1);
+      break;
+    case "ArrowDown":
+    case "s":
+    case "S":
+      setDirection(0, 1);
+      break;
+    case "ArrowLeft":
+    case "a":
+    case "A":
+      setDirection(-1, 0);
+      break;
+    case "ArrowRight":
+    case "d":
+    case "D":
+      setDirection(1, 0);
+      break;
+    case " ":
+      event.preventDefault();
+      if (running) pauseGame();
+      break;
+    case "Enter":
+      resetGame();
+      startGame();
+      break;
+  }
+});
+
+canvas.addEventListener("click", () => {
+  if (!running) {
+    startGame();
+  }
+});
+
+resetGame();
