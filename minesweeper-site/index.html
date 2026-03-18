@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>扫雷</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <h1>扫雷</h1>
+    <div class="toolbar">
+      <div class="info">💣 地雷：<span id="mines-left">10</span></div>
+      <div class="info">⏱ 时间：<span id="timer">0</span></div>
+      <button id="reset-btn">重新开始</button>
+    </div>
+    <p class="hint">左键翻开，右键插旗。清完所有非地雷格子就算赢。</p>
+    <div id="status">点击任意格开始</div>
+    <div id="board" class="board" aria-label="扫雷棋盘"></div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
