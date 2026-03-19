@@ -1,23 +1,24 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>贪吃蛇</title>
+  <title>Pattern Runner</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
-    <h1>贪吃蛇</h1>
-    <p class="hint">方向键 / WASD 控制，空格暂停，回车重新开始</p>
+    <div class="eyebrow">Northfield Student Hub</div>
+    <h1>Pattern Runner</h1>
+    <p class="hint">Use Arrow Keys or WASD to move. Press Space to pause and Enter to restart.</p>
 
     <div class="topbar">
-      <div class="score">分数：<span id="score">0</span></div>
-      <div class="score">最高分：<span id="best">0</span></div>
+      <div class="score">Score: <span id="score">0</span></div>
+      <div class="score">Best: <span id="best">0</span></div>
     </div>
 
     <canvas id="game" width="400" height="400"></canvas>
-    <p id="status">点击画面或按方向键开始</p>
+    <p id="status">Click the board or press a direction key to begin.</p>
   </div>
 
   <script src="script.js"></script>

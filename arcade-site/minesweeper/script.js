@@ -26,7 +26,7 @@ function createBoard() {
   seconds = 0;
   updateMinesLeft();
   timerEl.textContent = '0';
-  statusEl.textContent = '点击任意格开始';
+  statusEl.textContent = 'Click any cell to begin.';
   stopTimer();
 
   for (let row = 0; row < ROWS; row++) {
@@ -109,7 +109,7 @@ function handleLeftClick(cell) {
     placeMines(cell);
     startTimer();
     firstClick = false;
-    statusEl.textContent = '游戏进行中';
+    statusEl.textContent = 'In progress';
   }
 
   revealCell(cell);
@@ -185,7 +185,7 @@ function autoFlagFromNumber(cell) {
 
   if (hidden.length === remainingMines) {
     hidden.forEach((neighbor) => setFlag(neighbor, true));
-    statusEl.textContent = `已根据数字 ${cell.adjacent} 自动标记 ${hidden.length} 个雷`;
+    statusEl.textContent = `Auto-flagged ${hidden.length} mine${hidden.length === 1 ? '' : 's'} from the ${cell.adjacent}.`;
     return true;
   }
 
@@ -202,7 +202,7 @@ function autoRevealFromNumber(cell) {
   hidden.forEach((neighbor) => revealCell(neighbor));
 
   if (!gameOver) {
-    statusEl.textContent = `已根据数字 ${cell.adjacent} 自动翻开 ${hidden.length} 个安全格`;
+    statusEl.textContent = `Auto-opened ${hidden.length} safe cell${hidden.length === 1 ? '' : 's'} from the ${cell.adjacent}.`;
   }
 
   return true;
@@ -221,7 +221,7 @@ function loseGame() {
   gameOver = true;
   stopTimer();
   revealAllMines();
-  statusEl.textContent = '你踩到雷了，点“重新开始”再来一局';
+  statusEl.textContent = 'You hit a mine. Press Restart to try again.';
 }
 
 function checkWin() {
@@ -229,7 +229,7 @@ function checkWin() {
   if (revealedCount === safeCells && !gameOver) {
     gameOver = true;
     stopTimer();
-    statusEl.textContent = `你赢了！用时 ${seconds} 秒`;
+    statusEl.textContent = `You won in ${seconds} second${seconds === 1 ? '' : 's'}!`;
     board.flat().forEach((cell) => {
       if (cell.mine && !cell.flagged) {
         cell.flagged = true;

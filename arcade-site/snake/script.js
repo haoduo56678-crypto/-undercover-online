@@ -46,7 +46,7 @@ function resetGame() {
   running = false;
   paused = false;
   scoreEl.textContent = score;
-  statusEl.textContent = "点击画面或按方向键开始";
+  statusEl.textContent = "Click the board or press a direction key to begin.";
   placeFood();
   draw();
   stopLoop();
@@ -56,7 +56,7 @@ function startGame() {
   if (running) return;
   running = true;
   paused = false;
-  statusEl.textContent = "游戏中";
+  statusEl.textContent = "In progress";
   stopLoop();
   gameLoop = setInterval(update, speed);
 }
@@ -71,7 +71,7 @@ function stopLoop() {
 function pauseGame() {
   if (!running) return;
   paused = !paused;
-  statusEl.textContent = paused ? "已暂停，按空格继续" : "游戏中";
+  statusEl.textContent = paused ? "Paused — press Space to continue." : "In progress";
 }
 
 function update() {
@@ -110,17 +110,17 @@ function update() {
 function gameOver() {
   running = false;
   stopLoop();
-  statusEl.textContent = `游戏结束，得分 ${score}。按回车重新开始`;
+  statusEl.textContent = `Game over — score ${score}. Press Enter to restart.`;
   draw(true);
 }
 
 function draw(gameOverState = false) {
-  ctx.fillStyle = "#020617";
+  ctx.fillStyle = "#eff6ff";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   for (let i = 0; i < tileCount; i++) {
     for (let j = 0; j < tileCount; j++) {
-      ctx.fillStyle = (i + j) % 2 === 0 ? "#0f172a" : "#111827";
+      ctx.fillStyle = (i + j) % 2 === 0 ? "#dbeafe" : "#bfdbfe";
       ctx.fillRect(i * gridSize, j * gridSize, gridSize - 1, gridSize - 1);
     }
   }
@@ -131,17 +131,17 @@ function draw(gameOverState = false) {
   ctx.fill();
 
   snake.forEach((segment, index) => {
-    ctx.fillStyle = index === 0 ? "#22c55e" : "#16a34a";
+    ctx.fillStyle = index === 0 ? "#0f766e" : "#14b8a6";
     ctx.fillRect(segment.x * gridSize + 1, segment.y * gridSize + 1, gridSize - 2, gridSize - 2);
   });
 
   if (gameOverState) {
-    ctx.fillStyle = "rgba(0,0,0,0.45)";
+    ctx.fillStyle = "rgba(15, 23, 42, 0.32)";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "#f8fafc";
-    ctx.font = "bold 32px Microsoft YaHei";
+    ctx.fillStyle = "#0f172a";
+    ctx.font = "bold 32px Segoe UI";
     ctx.textAlign = "center";
-    ctx.fillText("游戏结束", canvas.width / 2, canvas.height / 2);
+    ctx.fillText("Game Over", canvas.width / 2, canvas.height / 2);
   }
 }
 

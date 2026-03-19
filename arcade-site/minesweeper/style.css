@@ -7,21 +7,31 @@ body {
   min-height: 100vh;
   display: grid;
   place-items: center;
-  background: linear-gradient(135deg, #0f172a, #1e293b);
-  color: #e2e8f0;
-  font-family: "Microsoft YaHei", sans-serif;
+  background: linear-gradient(180deg, #eef4fb, #dce9f8);
+  color: #183153;
+  font-family: "Segoe UI", Arial, sans-serif;
 }
 
 .app {
-  width: min(94vw, 560px);
+  width: min(94vw, 580px);
   padding: 24px;
-  border-radius: 22px;
-  background: rgba(15, 23, 42, 0.82);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(24, 49, 83, 0.1);
+  box-shadow: 0 18px 42px rgba(37, 99, 235, 0.12);
+}
+
+.eyebrow {
+  color: #2563eb;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
 }
 
 h1 {
-  margin: 0 0 16px;
+  margin: 10px 0 16px;
   text-align: center;
 }
 
@@ -36,21 +46,22 @@ h1 {
 .info {
   padding: 10px 14px;
   border-radius: 12px;
-  background: #1e293b;
+  background: #eef4fb;
+  border: 1px solid rgba(24, 49, 83, 0.08);
 }
 
 button {
   border: none;
   border-radius: 12px;
   padding: 10px 16px;
-  background: #22c55e;
+  background: #2563eb;
   color: white;
-  font-weight: bold;
+  font-weight: 700;
   cursor: pointer;
 }
 
 button:hover {
-  background: #16a34a;
+  background: #1d4ed8;
 }
 
 .hint, #status {
@@ -58,13 +69,15 @@ button:hover {
 }
 
 .hint {
-  color: #94a3b8;
+  color: #58708f;
   margin: 14px 0 8px;
+  line-height: 1.6;
 }
 
 #status {
   min-height: 24px;
   margin-bottom: 14px;
+  color: #37506f;
 }
 
 .board {
@@ -78,7 +91,7 @@ button:hover {
   aspect-ratio: 1 / 1;
   border: none;
   border-radius: 8px;
-  background: #475569;
+  background: #93c5fd;
   color: white;
   font-size: 18px;
   font-weight: bold;
@@ -86,11 +99,11 @@ button:hover {
 }
 
 .cell:hover {
-  background: #64748b;
+  background: #60a5fa;
 }
 
 .cell.revealed {
-  background: #cbd5e1;
+  background: #e2e8f0;
   color: #0f172a;
   cursor: default;
 }

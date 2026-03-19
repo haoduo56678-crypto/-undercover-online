@@ -1,22 +1,23 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>扫雷</title>
+  <title>Logic Grid</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="app">
-    <h1>扫雷</h1>
+    <div class="eyebrow">Northfield Student Hub</div>
+    <h1>Logic Grid</h1>
     <div class="toolbar">
-      <div class="info">💣 地雷：<span id="mines-left">10</span></div>
-      <div class="info">⏱ 时间：<span id="timer">0</span></div>
-      <button id="reset-btn">重新开始</button>
+      <div class="info">Mines: <span id="mines-left">10</span></div>
+      <div class="info">Time: <span id="timer">0</span>s</div>
+      <button id="reset-btn">Restart</button>
     </div>
-    <p class="hint">左键翻开，右键插旗。点开过的数字格：若剩余未知格必定都是雷，会自动标雷；若周围旗子数已够，会自动翻开剩余安全格。</p>
-    <div id="status">点击任意格开始</div>
-    <div id="board" class="board" aria-label="扫雷棋盘"></div>
+    <p class="hint">Left click to reveal. Right click to flag. Click a revealed number to auto-resolve nearby cells when the logic is certain.</p>
+    <div id="status">Click any cell to begin.</div>
+    <div id="board" class="board" aria-label="Logic Grid board"></div>
   </div>
   <script src="script.js"></script>
 </body>
