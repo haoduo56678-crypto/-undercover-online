@@ -102,9 +102,57 @@
       </div>
     </section>
 
+    <section class="feedback-section" id="feedback">
+      <div class="section-head">
+        <h2>Feedback</h2>
+        <p>Students can send bug reports, suggestions, or game feedback directly from this page.</p>
+      </div>
+
+      <form id="feedback-form" class="feedback-form">
+        <div class="form-grid">
+          <label>
+            <span>Name (optional)</span>
+            <input type="text" name="name" maxlength="120" placeholder="Your name" />
+          </label>
+
+          <label>
+            <span>Game</span>
+            <select name="game" required>
+              <option value="Snake">Snake</option>
+              <option value="Minesweeper">Minesweeper</option>
+              <option value="2048">2048</option>
+              <option value="Chess">Chess</option>
+              <option value="General Website">General Website</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Type</span>
+            <select name="type" required>
+              <option value="Bug Report">Bug Report</option>
+              <option value="Suggestion">Suggestion</option>
+              <option value="Difficulty Feedback">Difficulty Feedback</option>
+              <option value="General Feedback">General Feedback</option>
+            </select>
+          </label>
+        </div>
+
+        <label>
+          <span>Message</span>
+          <textarea name="message" rows="6" maxlength="4000" required placeholder="Tell us what happened or what you would like to see improved."></textarea>
+        </label>
+
+        <div class="feedback-actions">
+          <button class="primary-btn" type="submit">Send Feedback</button>
+          <p id="feedback-status" aria-live="polite"></p>
+        </div>
+      </form>
+    </section>
+
     <section class="footer-note">
       <p>Best experience on Chrome, Edge, Safari, and Firefox.</p>
     </section>
   </main>
+  <script src="feedback.js"></script>
 </body>
 </html>

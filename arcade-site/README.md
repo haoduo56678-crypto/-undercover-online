@@ -9,13 +9,22 @@ A lightweight static mini-game website for students.
 - 2048
 - Chess
 
+## Included feedback system
+
+- Student feedback form on the homepage
+- Sends feedback by email through the deployed API
+
 ## Deploy
 
-This site is static and can be deployed directly to:
+This site is deployed on Vercel and includes a serverless feedback endpoint.
 
-- Cloudflare Pages
-- Vercel
-- Netlify
-- GitHub Pages
+Required environment variables:
 
-Publish the `arcade-site` directory as the site root.
+- SMTP_HOST
+- SMTP_PORT
+- SMTP_SECURE
+- SMTP_USER
+- SMTP_PASS
+- SMTP_FROM
+- FEEDBACK_TO
+- FEEDBACK_ALLOWED_ORIGIN

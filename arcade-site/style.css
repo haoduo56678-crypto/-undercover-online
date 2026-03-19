@@ -32,7 +32,7 @@ body {
   padding: 42px 0 64px;
 }
 
-.hero, .intro-card, .card, .footer-note {
+.hero, .intro-card, .card, .footer-note, .feedback-form {
   background: var(--surface);
   border: 1px solid var(--line);
   box-shadow: var(--shadow);
@@ -79,11 +79,18 @@ h1 {
   color: white;
   font-weight: 700;
   padding: 13px 22px;
+  border: none;
   border-radius: 14px;
+  cursor: pointer;
 }
 
 .primary-btn:hover {
   background: var(--primary-dark);
+}
+
+.primary-btn:disabled {
+  opacity: 0.7;
+  cursor: wait;
 }
 
 .intro {
@@ -109,7 +116,8 @@ h1 {
   line-height: 1.7;
 }
 
-.games-section {
+.games-section,
+.feedback-section {
   margin-top: 8px;
 }
 
@@ -196,6 +204,62 @@ h1 {
   font-weight: 800;
 }
 
+.feedback-section {
+  margin-top: 28px;
+}
+
+.feedback-form {
+  border-radius: 24px;
+  padding: 24px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.feedback-form label {
+  display: block;
+}
+
+.feedback-form span {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.feedback-form input,
+.feedback-form select,
+.feedback-form textarea {
+  width: 100%;
+  border: 1px solid rgba(24, 49, 83, 0.14);
+  border-radius: 14px;
+  padding: 12px 14px;
+  font: inherit;
+  color: var(--text);
+  background: #fff;
+}
+
+.feedback-form textarea {
+  resize: vertical;
+  margin-top: 2px;
+}
+
+.feedback-actions {
+  margin-top: 18px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+#feedback-status {
+  margin: 0;
+  color: var(--muted);
+  min-height: 24px;
+}
+
 .footer-note {
   margin-top: 24px;
   border-radius: 20px;
@@ -208,7 +272,8 @@ h1 {
 }
 
 @media (max-width: 860px) {
-  .intro {
+  .intro,
+  .form-grid {
     grid-template-columns: 1fr;
   }
 }
@@ -219,7 +284,7 @@ h1 {
     padding-top: 18px;
   }
 
-  .hero, .intro-card, .card, .footer-note {
+  .hero, .intro-card, .card, .footer-note, .feedback-form {
     border-radius: 18px;
   }
 
@@ -227,7 +292,8 @@ h1 {
     padding: 28px 18px;
   }
 
-  .card {
+  .card,
+  .feedback-form {
     padding: 22px;
   }
 
