@@ -1,0 +1,127 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(180deg, #eef4fb, #dce9f8);
+  color: #183153;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.app {
+  width: min(94vw, 580px);
+  padding: 24px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(24, 49, 83, 0.1);
+  box-shadow: 0 18px 42px rgba(37, 99, 235, 0.12);
+}
+
+.eyebrow {
+  color: #2563eb;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+h1 {
+  margin: 10px 0 16px;
+  text-align: center;
+}
+
+.toolbar {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.info {
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: #eef4fb;
+  border: 1px solid rgba(24, 49, 83, 0.08);
+}
+
+button {
+  border: none;
+  border-radius: 12px;
+  padding: 10px 16px;
+  background: #2563eb;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #1d4ed8;
+}
+
+.hint, #status {
+  text-align: center;
+}
+
+.hint {
+  color: #58708f;
+  margin: 14px 0 8px;
+  line-height: 1.6;
+}
+
+#status {
+  min-height: 24px;
+  margin-bottom: 14px;
+  color: #37506f;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 4px;
+  user-select: none;
+}
+
+.cell {
+  aspect-ratio: 1 / 1;
+  border: none;
+  border-radius: 8px;
+  background: #93c5fd;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.cell:hover {
+  background: #60a5fa;
+}
+
+.cell.revealed {
+  background: #e2e8f0;
+  color: #0f172a;
+  cursor: default;
+}
+
+.cell.flagged {
+  background: #f59e0b;
+}
+
+.cell.mine {
+  background: #ef4444;
+  color: white;
+}
+
+.cell.n1 { color: #2563eb; }
+.cell.n2 { color: #16a34a; }
+.cell.n3 { color: #dc2626; }
+.cell.n4 { color: #7c3aed; }
+.cell.n5 { color: #b45309; }
+.cell.n6 { color: #0891b2; }
+.cell.n7 { color: #111827; }
+.cell.n8 { color: #334155; }

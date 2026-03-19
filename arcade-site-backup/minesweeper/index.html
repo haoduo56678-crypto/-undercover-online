@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Minesweeper</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <div class="eyebrow">Northfield Student Hub</div>
+    <h1>Logic Grid</h1>
+    <div class="toolbar">
+      <div class="info">Mines: <span id="mines-left">10</span></div>
+      <div class="info">Time: <span id="timer">0</span>s</div>
+      <button id="reset-btn">Restart</button>
+    </div>
+    <p class="hint">Left click to reveal. Right click to flag. Click a revealed number to auto-resolve nearby cells when the logic is certain.</p>
+    <div id="status">Click any cell to begin.</div>
+    <div id="board" class="board" aria-label="Logic Grid board"></div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

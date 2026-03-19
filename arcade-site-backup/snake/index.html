@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Snake</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="eyebrow">Northfield Student Hub</div>
+    <h1>Snake</h1>
+    <p class="hint">Use Arrow Keys or WASD to move. Press Space to pause and Enter to restart.</p>
+
+    <div class="topbar">
+      <div class="score">Score: <span id="score">0</span></div>
+      <div class="score">Best: <span id="best">0</span></div>
+    </div>
+
+    <canvas id="game" width="400" height="400"></canvas>
+    <p id="status">Click the board or press a direction key to begin.</p>
+
+    <div class="touch-controls" aria-label="Touch controls for Snake">
+      <button class="control up" data-direction="up" aria-label="Move up">▲</button>
+      <div class="middle-row">
+        <button class="control left" data-direction="left" aria-label="Move left">◀</button>
+        <button class="control action" data-action="pause" aria-label="Pause or resume">Pause</button>
+        <button class="control right" data-direction="right" aria-label="Move right">▶</button>
+      </div>
+      <button class="control down" data-direction="down" aria-label="Move down">▼</button>
+      <button class="control restart" data-action="restart">Restart</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

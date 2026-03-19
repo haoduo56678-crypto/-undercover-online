@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <title>Northfield Student Hub 管理后台</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <main class="admin-page">
+    <section class="panel hero-panel">
+      <p class="eyebrow">本地管理后台</p>
+      <h1>首页内容管理</h1>
+      <p>你可以在这台电脑上修改网站首页公告和规则条款，保存到本地 JSON 文件，确认没问题后再发布到线上。</p>
+    </section>
+
+    <section class="panel" id="login-panel">
+      <h2>解锁后台</h2>
+      <p>只有在这台电脑上运行本地管理服务时，这个页面才能保存修改。</p>
+      <form id="login-form" class="stack-form">
+        <label>
+          <span>密码</span>
+          <input id="password" name="password" type="password" autocomplete="current-password" required />
+        </label>
+        <button type="submit" class="primary-btn">进入后台</button>
+        <p id="login-status" class="status"></p>
+      </form>
+    </section>
+
+    <section class="panel" id="editor-panel" hidden>
+      <div class="panel-head">
+        <div>
+          <h2>首页内容</h2>
+          <p>修改会保存到 <code>content/site-content.json</code>。</p>
+        </div>
+        <button id="refresh-btn" class="secondary-btn" type="button">从文件重新加载</button>
+      </div>
+
+      <form id="content-form" class="stack-form">
+        <fieldset>
+          <legend>公告设置</legend>
+          <label class="checkbox-row">
+            <input type="checkbox" id="announcement-enabled" />
+            <span>在首页显示公告</span>
+          </label>
+          <div class="grid two-up">
+            <label>
+              <span>徽标文字</span>
+              <input id="announcement-label" maxlength="30" />
+            </label>
+            <label>
+              <span>链接文字</span>
+              <input id="announcement-link-text" maxlength="80" />
+            </label>
+          </div>
+          <label>
+            <span>公告标题</span>
+            <input id="announcement-title" maxlength="120" required />
+          </label>
+          <label>
+            <span>公告内容</span>
+            <textarea id="announcement-body" rows="4" maxlength="1000"></textarea>
+          </label>
+          <label>
+            <span>链接地址</span>
+            <input id="announcement-link-url" maxlength="200" placeholder="#terms 或 https://example.com" />
+          </label>
+        </fieldset>
+
+        <fieldset>
+          <legend>规则与条款</legend>
+          <label>
+            <span>版块标题</span>
+            <input id="terms-title" maxlength="120" required />
+          </label>
+          <label>
+            <span>简介</span>
+            <textarea id="terms-intro" rows="3" maxlength="500"></textarea>
+          </label>
+          <label>
+            <span>规则列表（每行一条）</span>
+            <textarea id="terms-items" rows="8" maxlength="3000"></textarea>
+          </label>
+          <label>
+            <span>最后更新日期</span>
+            <input id="terms-last-updated" type="date" />
+          </label>
+        </fieldset>
+
+        <div class="action-row">
+          <button type="submit" class="primary-btn">保存内容</button>
+          <button id="logout-btn" type="button" class="secondary-btn">锁定后台</button>
+        </div>
+        <p id="save-status" class="status"></p>
+      </form>
+    </section>
+
+    <section class="panel">
+      <h2>发布助手</h2>
+      <ol class="steps">
+        <li>保存后先在本地检查首页显示是否正常。</li>
+        <li>把修改过的文件提交到 git。</li>
+        <li>再推送到分支或通过 Vercel 发布。</li>
+      </ol>
+      <div class="command-box">
+        <code>git add content/site-content.json index.html style.css content-loader.js home-content.js admin && git commit -m "Update homepage content"</code>
+      </div>
+      <button id="copy-command-btn" type="button" class="secondary-btn">复制 git 命令</button>
+      <p id="copy-status" class="status"></p>
+    </section>
+  </main>
+  <script src="../content-loader.js"></script>
+  <script src="./script.js"></script>
+</body>
+</html>

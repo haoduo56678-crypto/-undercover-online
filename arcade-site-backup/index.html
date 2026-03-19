@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Northfield Student Hub is a browser-based mini game collection for students, featuring Snake, Minesweeper, 2048, and Chess." />
+  <title>Northfield Student Hub</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <span class="badge">Mini Game Collection</span>
+      <h1>Northfield Student Hub</h1>
+      <p class="subtitle">A simple collection of browser games for students. No downloads, no sign-in, and easy to play on school laptops and desktops.</p>
+      <div class="hero-actions">
+        <a class="primary-btn" href="#games">Browse Games</a>
+      </div>
+    </section>
+
+    <section class="announcement-section" id="announcement-section" hidden>
+      <div class="section-head">
+        <h2>Latest Announcement</h2>
+        <p>Updates managed from the local admin page on the owner computer.</p>
+      </div>
+      <div class="announcement-card">
+        <span class="badge" id="announcement-label">Update</span>
+        <h3 id="announcement-title"></h3>
+        <p id="announcement-body"></p>
+        <a id="announcement-link" class="text-link" hidden></a>
+      </div>
+    </section>
+
+    <section class="intro">
+      <div class="intro-card">
+        <h2>Play in Seconds</h2>
+        <p>Choose a game and start instantly in your browser.</p>
+      </div>
+      <div class="intro-card">
+        <h2>Works on School Devices</h2>
+        <p>Designed for modern browsers on classroom and library computers.</p>
+      </div>
+      <div class="intro-card">
+        <h2>Quick and Familiar</h2>
+        <p>Classic games that are easy to understand and fun to replay.</p>
+      </div>
+    </section>
+
+    <section class="games-section" id="games">
+      <div class="section-head">
+        <h2>Available Games</h2>
+        <p>Pick a game below to start playing.</p>
+      </div>
+
+      <div class="games">
+        <a class="card" href="./snake/">
+          <div class="card-top">
+            <div class="icon">🐍</div>
+            <span class="pill">Keyboard Game</span>
+          </div>
+          <h3>Snake</h3>
+          <p>Guide the snake, collect food, and keep growing without crashing into walls or yourself.</p>
+          <ul>
+            <li>Arrow Keys or WASD</li>
+            <li>Quick restart support</li>
+            <li>Best score saved locally</li>
+          </ul>
+          <span class="enter">Play Snake →</span>
+        </a>
+
+        <a class="card" href="./minesweeper/">
+          <div class="card-top">
+            <div class="icon">💣</div>
+            <span class="pill">Logic Game</span>
+          </div>
+          <h3>Minesweeper</h3>
+          <p>Use clues to reveal safe cells, place flags, and clear the board without hitting a mine.</p>
+          <ul>
+            <li>Classic 9×9 board</li>
+            <li>Right-click flagging</li>
+            <li>Helpful auto-reveal logic</li>
+          </ul>
+          <span class="enter">Play Minesweeper →</span>
+        </a>
+
+        <a class="card" href="./2048/">
+          <div class="card-top">
+            <div class="icon">🔢</div>
+            <span class="pill">Puzzle Game</span>
+          </div>
+          <h3>2048</h3>
+          <p>Slide matching numbers together, build bigger tiles, and try to reach the 2048 block.</p>
+          <ul>
+            <li>Arrow Keys or WASD</li>
+            <li>Touch swipe support</li>
+            <li>Score and best saved locally</li>
+          </ul>
+          <span class="enter">Play 2048 →</span>
+        </a>
+
+        <a class="card" href="./chess/">
+          <div class="card-top">
+            <div class="icon">♟️</div>
+            <span class="pill">Strategy Game</span>
+          </div>
+          <h3>Chess</h3>
+          <p>Play classic chess in your browser with local two-player mode or three computer difficulty levels.</p>
+          <ul>
+            <li>Two Players or AI Easy/Medium/Hard</li>
+            <li>Castling, en passant, and promotion</li>
+            <li>Animated queen wiggle when under attack</li>
+          </ul>
+          <span class="enter">Play Chess →</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="terms-section" id="terms">
+      <div class="section-head">
+        <h2 id="terms-title">Rules and Terms</h2>
+        <p id="terms-intro"></p>
+      </div>
+      <div class="terms-card">
+        <ul id="terms-list"></ul>
+        <p class="terms-updated" id="terms-updated"></p>
+      </div>
+    </section>
+
+    <section class="feedback-section" id="feedback">
+      <div class="section-head">
+        <h2>Feedback</h2>
+        <p>Students can send bug reports, suggestions, or game feedback directly from this page.</p>
+      </div>
+
+      <form id="feedback-form" class="feedback-form">
+        <div class="form-grid">
+          <label>
+            <span>Name (optional)</span>
+            <input type="text" name="name" maxlength="120" placeholder="Your name" />
+          </label>
+
+          <label>
+            <span>Game</span>
+            <select name="game" required>
+              <option value="Snake">Snake</option>
+              <option value="Minesweeper">Minesweeper</option>
+              <option value="2048">2048</option>
+              <option value="Chess">Chess</option>
+              <option value="General Website">General Website</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Type</span>
+            <select name="type" required>
+              <option value="Bug Report">Bug Report</option>
+              <option value="Suggestion">Suggestion</option>
+              <option value="Difficulty Feedback">Difficulty Feedback</option>
+              <option value="General Feedback">General Feedback</option>
+            </select>
+          </label>
+        </div>
+
+        <label>
+          <span>Message</span>
+          <textarea name="message" rows="6" maxlength="4000" required placeholder="Tell us what happened or what you would like to see improved."></textarea>
+        </label>
+
+        <div class="feedback-actions">
+          <button class="primary-btn" type="submit">Send Feedback</button>
+          <p id="feedback-status" aria-live="polite"></p>
+        </div>
+      </form>
+    </section>
+
+    <section class="footer-note">
+      <p>Best experience on Chrome, Edge, Safari, and Firefox.</p>
+    </section>
+  </main>
+  <script src="content-loader.js"></script>
+  <script src="home-content.js"></script>
+  <script src="feedback.js"></script>
+</body>
+</html>

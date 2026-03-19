@@ -1,0 +1,21 @@
+{
+  "announcement": {
+    "enabled": true,
+    "label": "New",
+    "title": "Welcome to Northfield Student Hub",
+    "body": "Use this announcement area to share school-safe updates, event notes, or quick reminders on the homepage.",
+    "linkText": "Read the rules",
+    "linkUrl": "#terms"
+  },
+  "terms": {
+    "title": "Rules and Terms",
+    "intro": "Keep the site friendly, school-appropriate, and respectful for everyone using it.",
+    "items": [
+      "Be respectful and use the site responsibly.",
+      "Do not try to break, spam, or misuse the games or feedback form.",
+      "Only share feedback that is helpful, accurate, and school-appropriate.",
+      "Teachers or the site owner may remove features or content when needed."
+    ],
+    "lastUpdated": "2026-03-19"
+  }
+}

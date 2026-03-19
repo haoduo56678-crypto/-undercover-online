@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chess</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <div class="eyebrow">Northfield Student Hub</div>
+
+    <div class="top-row">
+      <div>
+        <h1>Chess</h1>
+        <p class="hint">Play local two-player chess or face the computer on Easy, Medium, or Hard.</p>
+      </div>
+      <a class="home-link" href="../">← Home</a>
+    </div>
+
+    <div class="controls card">
+      <div class="control-group">
+        <label for="mode-select">Mode</label>
+        <select id="mode-select">
+          <option value="human">Two Players</option>
+          <option value="ai-easy">AI Easy</option>
+          <option value="ai-medium">AI Medium</option>
+          <option value="ai-hard">AI Hard</option>
+        </select>
+      </div>
+
+      <div class="control-group side-group">
+        <label for="side-select">Your Side</label>
+        <select id="side-select">
+          <option value="white">White</option>
+          <option value="black">Black</option>
+        </select>
+      </div>
+
+      <button id="new-game-btn">New Game</button>
+    </div>
+
+    <div class="layout">
+      <section class="board-panel card">
+        <div class="board-info">
+          <div class="turn-box">Turn <span id="turn-indicator">White</span></div>
+          <div class="turn-box">Mode <span id="mode-indicator">Two Players</span></div>
+        </div>
+        <div class="board-shell">
+          <div id="board" class="board" aria-label="Chess board"></div>
+        </div>
+        <p id="status" class="status">White to move.</p>
+      </section>
+
+      <aside class="sidebar">
+        <section class="card info-card">
+          <h2>How to Play</h2>
+          <ul>
+            <li>Click a piece, then click a highlighted square.</li>
+            <li>Castling, en passant, check, checkmate, and promotion are supported.</li>
+            <li>Promotion currently becomes a queen for quick play.</li>
+          </ul>
+        </section>
+
+        <section class="card info-card">
+          <h2>Captured Pieces</h2>
+          <div class="captured-wrap">
+            <div>
+              <h3>White captured</h3>
+              <div id="captured-white" class="captured-row"></div>
+            </div>
+            <div>
+              <h3>Black captured</h3>
+              <div id="captured-black" class="captured-row"></div>
+            </div>
+          </div>
+        </section>
+      </aside>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
