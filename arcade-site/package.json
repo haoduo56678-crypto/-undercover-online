@@ -2,6 +2,9 @@
   "name": "northfield-student-hub",
   "private": true,
   "version": "1.0.0",
+  "scripts": {
+    "admin": "node scripts/admin-server.js"
+  },
   "dependencies": {
     "nodemailer": "^6.9.16"
   }

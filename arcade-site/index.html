@@ -18,6 +18,19 @@
       </div>
     </section>
 
+    <section class="announcement-section" id="announcement-section" hidden>
+      <div class="section-head">
+        <h2>Latest Announcement</h2>
+        <p>Updates managed from the local admin page on the owner computer.</p>
+      </div>
+      <div class="announcement-card">
+        <span class="badge" id="announcement-label">Update</span>
+        <h3 id="announcement-title"></h3>
+        <p id="announcement-body"></p>
+        <a id="announcement-link" class="text-link" hidden></a>
+      </div>
+    </section>
+
     <section class="intro">
       <div class="intro-card">
         <h2>Play in Seconds</h2>
@@ -102,6 +115,17 @@
       </div>
     </section>
 
+    <section class="terms-section" id="terms">
+      <div class="section-head">
+        <h2 id="terms-title">Rules and Terms</h2>
+        <p id="terms-intro"></p>
+      </div>
+      <div class="terms-card">
+        <ul id="terms-list"></ul>
+        <p class="terms-updated" id="terms-updated"></p>
+      </div>
+    </section>
+
     <section class="feedback-section" id="feedback">
       <div class="section-head">
         <h2>Feedback</h2>
@@ -153,6 +177,8 @@
       <p>Best experience on Chrome, Edge, Safari, and Firefox.</p>
     </section>
   </main>
+  <script src="content-loader.js"></script>
+  <script src="home-content.js"></script>
   <script src="feedback.js"></script>
 </body>
 </html>

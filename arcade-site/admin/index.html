@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <title>Northfield Student Hub Admin</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <main class="admin-page">
+    <section class="panel hero-panel">
+      <p class="eyebrow">Local admin</p>
+      <h1>Homepage content manager</h1>
+      <p>Edit the public homepage announcement and rules content on this computer, save the JSON file locally, then deploy when you are ready.</p>
+    </section>
+
+    <section class="panel" id="login-panel">
+      <h2>Unlock</h2>
+      <p>This page only saves changes when the local admin helper is running on your computer.</p>
+      <form id="login-form" class="stack-form">
+        <label>
+          <span>Password</span>
+          <input id="password" name="password" type="password" autocomplete="current-password" required />
+        </label>
+        <button type="submit" class="primary-btn">Unlock admin</button>
+        <p id="login-status" class="status"></p>
+      </form>
+    </section>
+
+    <section class="panel" id="editor-panel" hidden>
+      <div class="panel-head">
+        <div>
+          <h2>Homepage content</h2>
+          <p>Changes save to <code>content/site-content.json</code>.</p>
+        </div>
+        <button id="refresh-btn" class="secondary-btn" type="button">Reload from file</button>
+      </div>
+
+      <form id="content-form" class="stack-form">
+        <fieldset>
+          <legend>Announcement</legend>
+          <label class="checkbox-row">
+            <input type="checkbox" id="announcement-enabled" />
+            <span>Show announcement on homepage</span>
+          </label>
+          <div class="grid two-up">
+            <label>
+              <span>Badge label</span>
+              <input id="announcement-label" maxlength="30" />
+            </label>
+            <label>
+              <span>Link text</span>
+              <input id="announcement-link-text" maxlength="80" />
+            </label>
+          </div>
+          <label>
+            <span>Headline</span>
+            <input id="announcement-title" maxlength="120" required />
+          </label>
+          <label>
+            <span>Message</span>
+            <textarea id="announcement-body" rows="4" maxlength="1000"></textarea>
+          </label>
+          <label>
+            <span>Link URL</span>
+            <input id="announcement-link-url" maxlength="200" placeholder="#terms or https://example.com" />
+          </label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Rules and terms</legend>
+          <label>
+            <span>Section title</span>
+            <input id="terms-title" maxlength="120" required />
+          </label>
+          <label>
+            <span>Intro text</span>
+            <textarea id="terms-intro" rows="3" maxlength="500"></textarea>
+          </label>
+          <label>
+            <span>Rules list (one rule per line)</span>
+            <textarea id="terms-items" rows="8" maxlength="3000"></textarea>
+          </label>
+          <label>
+            <span>Last updated</span>
+            <input id="terms-last-updated" type="date" />
+          </label>
+        </fieldset>
+
+        <div class="action-row">
+          <button type="submit" class="primary-btn">Save content</button>
+          <button id="logout-btn" type="button" class="secondary-btn">Lock</button>
+        </div>
+        <p id="save-status" class="status"></p>
+      </form>
+    </section>
+
+    <section class="panel">
+      <h2>Publish helper</h2>
+      <ol class="steps">
+        <li>Review the homepage locally after saving.</li>
+        <li>Commit the changed files to git.</li>
+        <li>Push to the connected branch or deploy through Vercel.</li>
+      </ol>
+      <div class="command-box">
+        <code>git add content/site-content.json index.html style.css content-loader.js home-content.js admin && git commit -m "Update homepage content"</code>
+      </div>
+      <button id="copy-command-btn" type="button" class="secondary-btn">Copy git command</button>
+      <p id="copy-status" class="status"></p>
+    </section>
+  </main>
+  <script src="../content-loader.js"></script>
+  <script src="./script.js"></script>
+</body>
+</html>

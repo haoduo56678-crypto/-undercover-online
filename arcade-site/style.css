@@ -32,10 +32,60 @@ body {
   padding: 42px 0 64px;
 }
 
-.hero, .intro-card, .card, .footer-note, .feedback-form {
+.hero, .intro-card, .card, .footer-note, .feedback-form, .announcement-card, .terms-card {
   background: var(--surface);
   border: 1px solid var(--line);
   box-shadow: var(--shadow);
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.text-link {
+  color: var(--primary);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.text-link:hover {
+  text-decoration: underline;
+}
+
+.announcement-card,
+.terms-card {
+  border-radius: 24px;
+  padding: 24px 26px;
+}
+
+.announcement-card h3 {
+  margin: 16px 0 12px;
+  font-size: 30px;
+}
+
+.announcement-card p,
+.terms-updated {
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+.terms-card ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.terms-card li {
+  margin-bottom: 12px;
+  line-height: 1.65;
+}
+
+.announcement-section,
+.terms-section {
+  margin-top: 28px;
+}
+
+.terms-updated {
+  margin: 18px 0 0;
 }
 
 .hero {
