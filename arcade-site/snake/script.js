@@ -3,6 +3,7 @@ const ctx = canvas.getContext("2d");
 const scoreEl = document.getElementById("score");
 const bestEl = document.getElementById("best");
 const statusEl = document.getElementById("status");
+const controlButtons = document.querySelectorAll(".control");
 
 const gridSize = 20;
 const tileCount = canvas.width / gridSize;
@@ -71,7 +72,7 @@ function stopLoop() {
 function pauseGame() {
   if (!running) return;
   paused = !paused;
-  statusEl.textContent = paused ? "Paused — press Space to continue." : "In progress";
+  statusEl.textContent = paused ? "Paused — press Space or tap Pause to continue." : "Game in progress";
 }
 
 function update() {
@@ -110,7 +111,7 @@ function update() {
 function gameOver() {
   running = false;
   stopLoop();
-  statusEl.textContent = `Game over — score ${score}. Press Enter to restart.`;
+  statusEl.textContent = `Game over — score ${score}. Press Enter or tap Restart.`;
   draw(true);
 }
 
@@ -151,6 +152,23 @@ function setDirection(x, y) {
   nextDirection = { x, y };
 }
 
+function handleDirectionName(name) {
+  switch (name) {
+    case "up":
+      setDirection(0, -1);
+      break;
+    case "down":
+      setDirection(0, 1);
+      break;
+    case "left":
+      setDirection(-1, 0);
+      break;
+    case "right":
+      setDirection(1, 0);
+      break;
+  }
+}
+
 document.addEventListener("keydown", (event) => {
   switch (event.key) {
     case "ArrowUp":
@@ -188,6 +206,35 @@ canvas.addEventListener("click", () => {
   if (!running) {
     startGame();
   }
+});
+
+controlButtons.forEach((button) => {
+  const activate = (event) => {
+    event.preventDefault();
+    const { direction: dir, action } = button.dataset;
+
+    if (dir) {
+      handleDirectionName(dir);
+      return;
+    }
+
+    if (action === "pause") {
+      if (!running) {
+        startGame();
+      } else {
+        pauseGame();
+      }
+      return;
+    }
+
+    if (action === "restart") {
+      resetGame();
+      startGame();
+    }
+  };
+
+  button.addEventListener("click", activate);
+  button.addEventListener("touchstart", activate, { passive: false });
 });
 
 resetGame();

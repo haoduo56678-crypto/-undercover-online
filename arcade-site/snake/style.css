@@ -63,10 +63,67 @@ canvas {
   background: #eff6ff;
   border: 3px solid #93c5fd;
   border-radius: 14px;
+  touch-action: manipulation;
 }
 
 #status {
   min-height: 24px;
   margin-top: 14px;
   color: #37506f;
+}
+
+.touch-controls {
+  margin-top: 18px;
+  display: grid;
+  gap: 10px;
+  justify-items: center;
+}
+
+.middle-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(72px, 88px));
+  gap: 10px;
+}
+
+.control {
+  border: none;
+  border-radius: 14px;
+  background: #2563eb;
+  color: white;
+  font-weight: 700;
+  min-height: 52px;
+  min-width: 72px;
+  padding: 12px 16px;
+  cursor: pointer;
+  box-shadow: 0 8px 18px rgba(37, 99, 235, 0.18);
+}
+
+.control:hover {
+  background: #1d4ed8;
+}
+
+.control.action,
+.control.restart {
+  background: #0f766e;
+}
+
+.control.action:hover,
+.control.restart:hover {
+  background: #0d5f59;
+}
+
+@media (max-width: 520px) {
+  .container {
+    width: min(96vw, 480px);
+    padding: 18px;
+  }
+
+  .middle-row {
+    grid-template-columns: repeat(3, minmax(64px, 1fr));
+  }
+
+  .control {
+    min-width: 64px;
+    padding: 12px 10px;
+  }
 }
