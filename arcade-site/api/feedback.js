@@ -1,7 +1,12 @@
 const nodemailer = require('nodemailer');
 
-const ALLOWED_ORIGIN = process.env.FEEDBACK_ALLOWED_ORIGIN || '*';
-const TO_EMAIL = process.env.FEEDBACK_TO || 'haoduo56678@gmail.com';
+function env(name, fallback = '') {
+  const value = process.env[name];
+  return typeof value === 'string' ? value.trim() : fallback;
+}
+
+const ALLOWED_ORIGIN = env('FEEDBACK_ALLOWED_ORIGIN', '*');
+const TO_EMAIL = env('FEEDBACK_TO', 'haoduo56678@gmail.com');
 
 function setCors(res) {
   res.setHeader('Access-Control-Allow-Origin', ALLOWED_ORIGIN);
@@ -40,12 +45,12 @@ module.exports = async (req, res) => {
     }
 
     const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: Number(process.env.SMTP_PORT || 465),
-      secure: String(process.env.SMTP_SECURE || 'true').toLowerCase() === 'true',
+      host: env('SMTP_HOST'),
+      port: Number(env('SMTP_PORT', '465')),
+      secure: env('SMTP_SECURE', 'true').toLowerCase() === 'true',
       auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
+        user: env('SMTP_USER'),
+        pass: env('SMTP_PASS'),
       },
     });
 
@@ -66,7 +71,7 @@ module.exports = async (req, res) => {
     ].join('\n');
 
     await transporter.sendMail({
-      from: process.env.SMTP_FROM || process.env.SMTP_USER,
+      from: env('SMTP_FROM') || env('SMTP_USER'),
       to: TO_EMAIL,
       subject,
       text,
