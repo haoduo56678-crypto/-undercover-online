@@ -1,0 +1,13 @@
+{
+  "name": "openclaw-mailer",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Local SMTP mail helper for OpenClaw",
+  "main": "scripts/send-mail.js",
+  "scripts": {
+    "send-mail": "node scripts/send-mail.js"
+  },
+  "dependencies": {
+    "nodemailer": "^6.9.16"
+  }
+}
