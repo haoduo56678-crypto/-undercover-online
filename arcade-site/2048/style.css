@@ -1,0 +1,135 @@
+* { box-sizing: border-box; }
+
+:root {
+  --bg: #eef4fb;
+  --panel: rgba(255,255,255,0.94);
+  --line: rgba(24,49,83,0.1);
+  --text: #183153;
+  --muted: #58708f;
+  --primary: #2563eb;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  font-family: "Segoe UI", Arial, sans-serif;
+  color: var(--text);
+  background: linear-gradient(180deg, #eef4fb, #dce9f8);
+}
+
+.app {
+  width: min(94vw, 540px);
+  padding: 22px;
+  border-radius: 24px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  box-shadow: 0 18px 42px rgba(37, 99, 235, 0.12);
+}
+
+.eyebrow {
+  color: var(--primary);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: start;
+}
+
+h1 {
+  margin: 10px 0 8px;
+  font-size: 44px;
+}
+
+.hint {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+#restart-btn {
+  border: none;
+  border-radius: 14px;
+  padding: 12px 16px;
+  background: var(--primary);
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+#restart-btn:hover { background: #1d4ed8; }
+
+.scoreboard {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin: 18px 0 14px;
+}
+
+.score-box {
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: #eef4fb;
+  border: 1px solid var(--line);
+  font-weight: 700;
+  display: flex;
+  justify-content: space-between;
+}
+
+#status {
+  min-height: 24px;
+  margin: 0 0 14px;
+  color: #37506f;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  padding: 10px;
+  border-radius: 18px;
+  background: #bfd7f7;
+  touch-action: none;
+}
+
+.cell {
+  aspect-ratio: 1 / 1;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: clamp(22px, 5vw, 34px);
+  background: rgba(255,255,255,0.55);
+  color: #355070;
+}
+
+.cell.empty { background: rgba(255,255,255,0.35); }
+.cell.v2 { background: #f8fafc; }
+.cell.v4 { background: #dbeafe; }
+.cell.v8 { background: #bfdbfe; }
+.cell.v16 { background: #93c5fd; }
+.cell.v32 { background: #60a5fa; color: white; }
+.cell.v64 { background: #3b82f6; color: white; }
+.cell.v128 { background: #14b8a6; color: white; }
+.cell.v256 { background: #0f766e; color: white; }
+.cell.v512 { background: #8b5cf6; color: white; }
+.cell.v1024 { background: #7c3aed; color: white; }
+.cell.v2048 { background: #f59e0b; color: white; }
+
+@media (max-width: 560px) {
+  .header-row {
+    flex-direction: column;
+  }
+
+  #restart-btn {
+    width: 100%;
+  }
+}

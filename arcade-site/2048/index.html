@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2048</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <div class="eyebrow">Northfield Student Hub</div>
+    <div class="header-row">
+      <div>
+        <h1>2048</h1>
+        <p class="hint">Combine matching tiles to reach 2048. Use Arrow Keys, WASD, or swipe on touch devices.</p>
+      </div>
+      <button id="restart-btn">Restart</button>
+    </div>
+
+    <div class="scoreboard">
+      <div class="score-box">Score <span id="score">0</span></div>
+      <div class="score-box">Best <span id="best">0</span></div>
+    </div>
+
+    <p id="status">Press any arrow key or swipe to begin.</p>
+    <div id="board" class="board" aria-label="2048 board"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
