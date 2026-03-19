@@ -94,7 +94,13 @@ function forEachNeighbor(row, col, callback) {
 }
 
 function handleLeftClick(cell) {
-  if (gameOver || cell.flagged || cell.revealed) return;
+  if (gameOver || cell.flagged) return;
+
+  if (cell.revealed) {
+    autoFlagFromNumber(cell);
+    checkWin();
+    return;
+  }
 
   if (firstClick) {
     placeMines(cell);
@@ -140,6 +146,44 @@ function revealCell(cell) {
   forEachNeighbor(cell.row, cell.col, (neighbor) => {
     if (!neighbor.revealed) revealCell(neighbor);
   });
+}
+
+function getNeighborState(cell) {
+  const hidden = [];
+  const flagged = [];
+
+  forEachNeighbor(cell.row, cell.col, (neighbor) => {
+    if (neighbor.flagged) {
+      flagged.push(neighbor);
+    } else if (!neighbor.revealed) {
+      hidden.push(neighbor);
+    }
+  });
+
+  return { hidden, flagged };
+}
+
+function setFlag(cell, flagged) {
+  if (cell.revealed || cell.flagged === flagged) return;
+  cell.flagged = flagged;
+  cell.element.textContent = flagged ? '🚩' : '';
+  cell.element.classList.toggle('flagged', flagged);
+  flagsUsed += flagged ? 1 : -1;
+  updateMinesLeft();
+}
+
+function autoFlagFromNumber(cell) {
+  if (!cell.revealed || cell.adjacent <= 0) return;
+
+  const { hidden, flagged } = getNeighborState(cell);
+  const remainingMines = cell.adjacent - flagged.length;
+
+  if (hidden.length === 0 || remainingMines <= 0) return;
+
+  if (hidden.length === remainingMines) {
+    hidden.forEach((neighbor) => setFlag(neighbor, true));
+    statusEl.textContent = `已根据数字 ${cell.adjacent} 自动标记 ${hidden.length} 个雷`;
+  }
 }
 
 function revealAllMines() {
