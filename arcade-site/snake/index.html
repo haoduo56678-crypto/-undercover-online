@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>贪吃蛇</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>贪吃蛇</h1>
+    <p class="hint">方向键 / WASD 控制，空格暂停，回车重新开始</p>
+
+    <div class="topbar">
+      <div class="score">分数：<span id="score">0</span></div>
+      <div class="score">最高分：<span id="best">0</span></div>
+    </div>
+
+    <canvas id="game" width="400" height="400"></canvas>
+    <p id="status">点击画面或按方向键开始</p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
