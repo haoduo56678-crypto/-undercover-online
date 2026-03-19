@@ -3,40 +3,77 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Northfield Student Hub is a browser-based mini game collection for students, featuring Snake and Minesweeper." />
   <title>Northfield Student Hub</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <main class="page">
     <section class="hero">
-      <span class="badge">Student Practice Portal</span>
+      <span class="badge">Mini Game Collection</span>
       <h1>Northfield Student Hub</h1>
-      <p class="subtitle">A simple browser-based activity space for students. Quick to load, easy to use, and accessible on school laptops, desktops, and tablets.</p>
+      <p class="subtitle">A simple collection of browser games for students. No downloads, no sign-in, and easy to play on school laptops and desktops.</p>
+      <div class="hero-actions">
+        <a class="primary-btn" href="#games">Browse Games</a>
+      </div>
     </section>
 
-    <section class="notice">
-      <h2>Featured Student Activities</h2>
-      <p>Select an activity below. Each one runs directly in the browser with no installation required.</p>
+    <section class="intro">
+      <div class="intro-card">
+        <h2>Play in Seconds</h2>
+        <p>Choose a game and start instantly in your browser.</p>
+      </div>
+      <div class="intro-card">
+        <h2>Works on School Devices</h2>
+        <p>Designed for modern browsers on classroom and library computers.</p>
+      </div>
+      <div class="intro-card">
+        <h2>Quick and Familiar</h2>
+        <p>Classic games that are easy to understand and fun to replay.</p>
+      </div>
     </section>
 
-    <section class="games">
-      <a class="card" href="./snake/">
-        <div class="icon">🐍</div>
-        <h3>Pattern Runner</h3>
-        <p>A fast-paced keyboard activity focused on attention, timing, and spatial awareness.</p>
-        <span class="enter">Open Activity →</span>
-      </a>
+    <section class="games-section" id="games">
+      <div class="section-head">
+        <h2>Available Games</h2>
+        <p>Pick a game below to start playing.</p>
+      </div>
 
-      <a class="card" href="./minesweeper/">
-        <div class="icon">🧩</div>
-        <h3>Logic Grid</h3>
-        <p>A classic deduction challenge that encourages careful observation and step-by-step reasoning.</p>
-        <span class="enter">Open Activity →</span>
-      </a>
+      <div class="games">
+        <a class="card" href="./snake/">
+          <div class="card-top">
+            <div class="icon">🐍</div>
+            <span class="pill">Keyboard Game</span>
+          </div>
+          <h3>Snake</h3>
+          <p>Guide the snake, collect food, and keep growing without crashing into walls or yourself.</p>
+          <ul>
+            <li>Arrow Keys or WASD</li>
+            <li>Quick restart support</li>
+            <li>Best score saved locally</li>
+          </ul>
+          <span class="enter">Play Snake →</span>
+        </a>
+
+        <a class="card" href="./minesweeper/">
+          <div class="card-top">
+            <div class="icon">💣</div>
+            <span class="pill">Logic Game</span>
+          </div>
+          <h3>Minesweeper</h3>
+          <p>Use clues to reveal safe cells, place flags, and clear the board without hitting a mine.</p>
+          <ul>
+            <li>Classic 9×9 board</li>
+            <li>Right-click flagging</li>
+            <li>Helpful auto-reveal logic</li>
+          </ul>
+          <span class="enter">Play Minesweeper →</span>
+        </a>
+      </div>
     </section>
 
     <section class="footer-note">
-      <p>Optimized for modern browsers. Best experience on Chrome, Edge, Safari, and Firefox.</p>
+      <p>Best experience on Chrome, Edge, Safari, and Firefox.</p>
     </section>
   </main>
 </body>

@@ -109,7 +109,7 @@ function handleLeftClick(cell) {
     placeMines(cell);
     startTimer();
     firstClick = false;
-    statusEl.textContent = 'In progress';
+    statusEl.textContent = 'Game in progress';
   }
 
   revealCell(cell);

@@ -56,7 +56,7 @@ function startGame() {
   if (running) return;
   running = true;
   paused = false;
-  statusEl.textContent = "In progress";
+  statusEl.textContent = "Game in progress";
   stopLoop();
   gameLoop = setInterval(update, speed);
 }
