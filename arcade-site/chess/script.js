@@ -15,8 +15,8 @@ const PIECES = {
   black: { king: '♚', queen: '♛', rook: '♜', bishop: '♝', knight: '♞', pawn: '♟' }
 };
 const PIECE_VALUES = { pawn: 100, knight: 320, bishop: 330, rook: 500, queen: 900, king: 20000 };
-const KNIGHT_OFFSETS = [[1,2],[2,1],[-1,2],[-2,1],[1,-2],[2,-1],[-1,-2],[-2,-1]];
-const KING_OFFSETS = [[1,0],[-1,0],[0,1],[0,-1],[1,1],[-1,1],[1,-1],[-1,-1]];
+const KNIGHT_OFFSETS = [[1, 2], [2, 1], [-1, 2], [-2, 1], [1, -2], [2, -1], [-1, -2], [-2, -1]];
+const KING_OFFSETS = [[1, 0], [-1, 0], [0, 1], [0, -1], [1, 1], [-1, 1], [1, -1], [-1, -1]];
 
 let state = null;
 let selected = null;
@@ -103,7 +103,7 @@ function isSquareAttacked(board, row, col, byColor) {
     if (piece && piece.color === byColor && piece.type === 'knight') return true;
   }
 
-  const straightDirs = [[1,0],[-1,0],[0,1],[0,-1]];
+  const straightDirs = [[1, 0], [-1, 0], [0, 1], [0, -1]];
   for (const [dr, dc] of straightDirs) {
     let r = row + dr;
     let c = col + dc;
@@ -118,7 +118,7 @@ function isSquareAttacked(board, row, col, byColor) {
     }
   }
 
-  const diagDirs = [[1,1],[1,-1],[-1,1],[-1,-1]];
+  const diagDirs = [[1, 1], [1, -1], [-1, 1], [-1, -1]];
   for (const [dr, dc] of diagDirs) {
     let r = row + dr;
     let c = col + dc;
@@ -223,9 +223,9 @@ function getPseudoMoves(stateInput, row, col) {
     }
   }
 
-  if (type === 'bishop') pushSlidingMoves(board, moves, row, col, color, [[1,1],[1,-1],[-1,1],[-1,-1]]);
-  if (type === 'rook') pushSlidingMoves(board, moves, row, col, color, [[1,0],[-1,0],[0,1],[0,-1]]);
-  if (type === 'queen') pushSlidingMoves(board, moves, row, col, color, [[1,1],[1,-1],[-1,1],[-1,-1],[1,0],[-1,0],[0,1],[0,-1]]);
+  if (type === 'bishop') pushSlidingMoves(board, moves, row, col, color, [[1, 1], [1, -1], [-1, 1], [-1, -1]]);
+  if (type === 'rook') pushSlidingMoves(board, moves, row, col, color, [[1, 0], [-1, 0], [0, 1], [0, -1]]);
+  if (type === 'queen') pushSlidingMoves(board, moves, row, col, color, [[1, 1], [1, -1], [-1, 1], [-1, -1], [1, 0], [-1, 0], [0, 1], [0, -1]]);
 
   if (type === 'king') {
     for (const [dr, dc] of KING_OFFSETS) {
@@ -474,10 +474,112 @@ function capitalize(text) {
   return text[0].toUpperCase() + text.slice(1);
 }
 
+function pieceAriaLabel(piece) {
+  return `${capitalize(piece.color)} ${piece.type}`;
+}
+
+function createSvgPiece(piece, small = false) {
+  const wrapper = document.createElement('span');
+  wrapper.className = `${small ? 'captured-piece' : 'piece'} ${piece.color} ${piece.type}`;
+  wrapper.setAttribute('role', 'img');
+  wrapper.setAttribute('aria-label', pieceAriaLabel(piece));
+  wrapper.innerHTML = getPieceSvgMarkup(piece.type);
+  return wrapper;
+}
+
+function getPieceSvgMarkup(type) {
+  const shared = `
+    <defs>
+      <linearGradient id="mainGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="var(--piece-main)" />
+        <stop offset="100%" stop-color="var(--piece-secondary)" />
+      </linearGradient>
+      <linearGradient id="shineGrad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="rgba(255,255,255,0.95)" />
+        <stop offset="100%" stop-color="rgba(255,255,255,0)" />
+      </linearGradient>
+    </defs>
+    <ellipse cx="50" cy="88" rx="22" ry="6" fill="var(--piece-shadow)" />
+  `;
+
+  const frameStart = `<svg viewBox="0 0 100 100" aria-hidden="true" focusable="false">${shared}`;
+  const frameEnd = `</svg>`;
+
+  const bodies = {
+    pawn: `
+      <circle cx="50" cy="28" r="10" fill="url(#mainGrad)" stroke="var(--piece-stroke)" stroke-width="3.2" />
+      <path d="M37 71c2-14 6-20 13-26 7 6 11 12 13 26" fill="url(#mainGrad)" stroke="var(--piece-stroke)" stroke-width="3.2" stroke-linejoin="round" />
+      <rect x="34" y="71" width="32" height="7" rx="3.5" fill="var(--piece-tertiary)" stroke="var(--piece-stroke)" stroke-width="3" />
+      <rect x="28" y="79" width="44" height="7" rx="3.5" fill="url(#mainGrad)" stroke="var(--piece-stroke)" stroke-width="3" />
+      <path d="M42 23c4-4 12-4 16 0" fill="none" stroke="rgba(255,255,255,0.65)" stroke-width="2.5" stroke-linecap="round" />
+    `,
+    rook: `
+      <path d="M31 24h8v8h6v-8h10v8h6v-8h8v12H31z" fill="url(#mainGrad)" stroke="var(--piece-stroke)" stroke-width="3" stroke-linejoin="round" />
+      <path d="M35 36h30l-3 12 5 20H33l5-20z" fill="url(#mainGrad)" stroke="var(--piece-stroke)" stroke-width="3.2" stroke-linejoin="round" />
+      <rect x="30" y="69" width="40" height="7" rx="3.5" fill="var(--piece-tertiary)" stroke="var(--piece-stroke)" stroke-width="3" />
+      <rect x="24" y="78" width="52" height="8" rx="4" fill="url(#mainGrad)" stroke="var(--piece-stroke)" stroke-width="3" />
+      <path d="M38 42h24" stroke="rgba(255,255,255,0.52)" stroke-width="2.4" stroke-linecap="round" />
+    `,
+    knight: `
+      <path d="M63 28c-4-4-11-6-17-2-9 6-7 17-13 20-6 3-8 10-6 19h37c-1-6 0-11 5-16 3-3 6-8 4-14-1-4-4-6-10-7z" fill="url(#mainGrad)" stroke="var(--piece-stroke)" stroke-width="3.2" stroke-linejoin="round" />
+      <path d="M45 40c6 0 12-4 15-8" fill="none" stroke="var(--piece-stroke)" stroke-width="3" stroke-linecap="round" />
+      <circle cx="55" cy="35" r="2.5" fill="var(--piece-stroke)" />
+      <rect x="31" y="69" width="38" height="7" rx="3.5" fill="var(--piece-tertiary)" stroke="var(--piece-stroke)" stroke-width="3" />
+      <rect x="25" y="78" width="50" height="8" rx="4" fill="url(#mainGrad)" stroke="var(--piece-stroke)" stroke-width="3" />
+      <path d="M44 31c4-4 10-4 14-1" fill="none" stroke="rgba(255,255,255,0.42)" stroke-width="2.4" stroke-linecap="round" />
+    `,
+    bishop: `
+      <path d="M50 20l7 8-4 6 6 8c5 6 5 14 1 23H40c-4-9-4-17 1-23l6-8-4-6z" fill="url(#mainGrad)" stroke="var(--piece-stroke)" stroke-width="3.2" stroke-linejoin="round" />
+      <path d="M50 24l-4 14" stroke="var(--piece-stroke)" stroke-width="3" stroke-linecap="round" />
+      <circle cx="50" cy="18" r="4.5" fill="var(--piece-tertiary)" stroke="var(--piece-stroke)" stroke-width="3" />
+      <rect x="32" y="69" width="36" height="7" rx="3.5" fill="var(--piece-tertiary)" stroke="var(--piece-stroke)" stroke-width="3" />
+      <rect x="26" y="78" width="48" height="8" rx="4" fill="url(#mainGrad)" stroke="var(--piece-stroke)" stroke-width="3" />
+      <path d="M45 30c4-3 8-3 11 0" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2.3" stroke-linecap="round" />
+    `,
+    queen: `
+      <circle cx="32" cy="24" r="4.5" fill="var(--piece-tertiary)" stroke="var(--piece-stroke)" stroke-width="3" />
+      <circle cx="44" cy="18" r="4.5" fill="var(--piece-tertiary)" stroke="var(--piece-stroke)" stroke-width="3" />
+      <circle cx="56" cy="18" r="4.5" fill="var(--piece-tertiary)" stroke="var(--piece-stroke)" stroke-width="3" />
+      <circle cx="68" cy="24" r="4.5" fill="var(--piece-tertiary)" stroke="var(--piece-stroke)" stroke-width="3" />
+      <path d="M31 29l8 12 11-15 11 15 8-12 4 7-8 30H35l-8-30z" fill="url(#mainGrad)" stroke="var(--piece-stroke)" stroke-width="3.2" stroke-linejoin="round" />
+      <path d="M38 48h24" stroke="rgba(255,255,255,0.54)" stroke-width="2.5" stroke-linecap="round" />
+      <rect x="31" y="69" width="38" height="7" rx="3.5" fill="var(--piece-tertiary)" stroke="var(--piece-stroke)" stroke-width="3" />
+      <rect x="25" y="78" width="50" height="8" rx="4" fill="url(#mainGrad)" stroke="var(--piece-stroke)" stroke-width="3" />
+    `,
+    king: `
+      <path d="M50 14v12" fill="none" stroke="var(--piece-stroke)" stroke-width="3.4" stroke-linecap="round" />
+      <path d="M44 20h12" fill="none" stroke="var(--piece-stroke)" stroke-width="3.4" stroke-linecap="round" />
+      <path d="M36 32c3-7 9-10 14-10s11 3 14 10l2 8c4 4 6 9 4 17H30c-2-8 0-13 4-17z" fill="url(#mainGrad)" stroke="var(--piece-stroke)" stroke-width="3.2" stroke-linejoin="round" />
+      <path d="M41 43h18" stroke="rgba(255,255,255,0.54)" stroke-width="2.4" stroke-linecap="round" />
+      <rect x="31" y="61" width="38" height="7" rx="3.5" fill="var(--piece-tertiary)" stroke="var(--piece-stroke)" stroke-width="3" />
+      <rect x="28" y="70" width="44" height="7" rx="3.5" fill="var(--piece-tertiary)" stroke="var(--piece-stroke)" stroke-width="3" />
+      <rect x="24" y="79" width="52" height="8" rx="4" fill="url(#mainGrad)" stroke="var(--piece-stroke)" stroke-width="3" />
+    `
+  };
+
+  return `${frameStart}${bodies[type]}${frameEnd}`;
+}
+
+function renderCaptured(container, pieces) {
+  container.innerHTML = '';
+  if (!pieces.length) {
+    const empty = document.createElement('span');
+    empty.className = 'empty-note';
+    empty.textContent = 'None yet';
+    container.appendChild(empty);
+    return;
+  }
+
+  pieces.forEach((piece) => {
+    container.appendChild(createSvgPiece(piece, true));
+  });
+}
+
 function render() {
   boardEl.innerHTML = '';
   const queenThreats = getQueenThreatMap(state.board);
   const checkedKing = findKing(state.board, state.turn);
+  const kingInCheck = checkedKing ? isInCheck(state.board, state.turn) : false;
 
   for (let visualRow = 0; visualRow < 8; visualRow++) {
     for (let visualCol = 0; visualCol < 8; visualCol++) {
@@ -489,12 +591,18 @@ function render() {
       square.className = `square ${(boardRow + boardCol) % 2 === 0 ? 'light' : 'dark'}`;
       square.dataset.row = String(boardRow);
       square.dataset.col = String(boardCol);
-      square.setAttribute('aria-label', coordToName(boardRow, boardCol));
+      square.setAttribute('aria-label', piece ? `${coordToName(boardRow, boardCol)} ${pieceAriaLabel(piece)}` : coordToName(boardRow, boardCol));
 
       if (selected && selected.row === boardRow && selected.col === boardCol) square.classList.add('selected');
       const moveMatch = legalMoves.find(move => move.toRow === boardRow && move.toCol === boardCol);
       if (moveMatch) square.classList.add(piece ? 'capture' : 'move');
-      if (checkedKing && checkedKing.row === boardRow && checkedKing.col === boardCol && isInCheck(state.board, state.turn)) {
+      if (state.lastMove && (
+        (state.lastMove.fromRow === boardRow && state.lastMove.fromCol === boardCol) ||
+        (state.lastMove.toRow === boardRow && state.lastMove.toCol === boardCol)
+      )) {
+        square.classList.add('last-move');
+      }
+      if (checkedKing && checkedKing.row === boardRow && checkedKing.col === boardCol && kingInCheck) {
         square.classList.add('in-check');
       }
 
@@ -513,12 +621,10 @@ function render() {
       }
 
       if (piece) {
-        const pieceEl = document.createElement('span');
-        pieceEl.className = `piece ${piece.color} ${piece.type}`;
+        const pieceEl = createSvgPiece(piece);
         if (piece.type === 'queen' && queenThreats.has(`${boardRow},${boardCol}`)) {
           pieceEl.classList.add('scared');
         }
-        pieceEl.textContent = PIECES[piece.color][piece.type];
         square.appendChild(pieceEl);
       }
 
@@ -530,8 +636,8 @@ function render() {
   turnIndicatorEl.textContent = capitalize(state.turn);
   modeIndicatorEl.textContent = getModeLabel(state.mode);
   statusEl.textContent = state.status;
-  capturedWhiteEl.textContent = state.capturedWhite.map(piece => PIECES[piece.color][piece.type]).join(' ');
-  capturedBlackEl.textContent = state.capturedBlack.map(piece => PIECES[piece.color][piece.type]).join(' ');
+  renderCaptured(capturedWhiteEl, state.capturedWhite);
+  renderCaptured(capturedBlackEl, state.capturedBlack);
 
   syncControlState();
 }
