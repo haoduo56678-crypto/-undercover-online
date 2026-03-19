@@ -172,21 +172,25 @@ function handleDirectionName(name) {
 document.addEventListener("keydown", (event) => {
   switch (event.key) {
     case "ArrowUp":
+      event.preventDefault();
     case "w":
     case "W":
       setDirection(0, -1);
       break;
     case "ArrowDown":
+      event.preventDefault();
     case "s":
     case "S":
       setDirection(0, 1);
       break;
     case "ArrowLeft":
+      event.preventDefault();
     case "a":
     case "A":
       setDirection(-1, 0);
       break;
     case "ArrowRight":
+      event.preventDefault();
     case "d":
     case "D":
       setDirection(1, 0);
