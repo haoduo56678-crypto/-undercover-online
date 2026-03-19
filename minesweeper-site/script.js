@@ -97,7 +97,10 @@ function handleLeftClick(cell) {
   if (gameOver || cell.flagged) return;
 
   if (cell.revealed) {
-    autoFlagFromNumber(cell);
+    const didFlag = autoFlagFromNumber(cell);
+    if (!didFlag) {
+      autoRevealFromNumber(cell);
+    }
     checkWin();
     return;
   }
@@ -173,17 +176,36 @@ function setFlag(cell, flagged) {
 }
 
 function autoFlagFromNumber(cell) {
-  if (!cell.revealed || cell.adjacent <= 0) return;
+  if (!cell.revealed || cell.adjacent <= 0) return false;
 
   const { hidden, flagged } = getNeighborState(cell);
   const remainingMines = cell.adjacent - flagged.length;
 
-  if (hidden.length === 0 || remainingMines <= 0) return;
+  if (hidden.length === 0 || remainingMines <= 0) return false;
 
   if (hidden.length === remainingMines) {
     hidden.forEach((neighbor) => setFlag(neighbor, true));
     statusEl.textContent = `已根据数字 ${cell.adjacent} 自动标记 ${hidden.length} 个雷`;
+    return true;
   }
+
+  return false;
+}
+
+function autoRevealFromNumber(cell) {
+  if (!cell.revealed || cell.adjacent <= 0 || gameOver) return false;
+
+  const { hidden, flagged } = getNeighborState(cell);
+
+  if (hidden.length === 0 || flagged.length !== cell.adjacent) return false;
+
+  hidden.forEach((neighbor) => revealCell(neighbor));
+
+  if (!gameOver) {
+    statusEl.textContent = `已根据数字 ${cell.adjacent} 自动翻开 ${hidden.length} 个安全格`;
+  }
+
+  return true;
 }
 
 function revealAllMines() {
