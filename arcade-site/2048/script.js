@@ -167,7 +167,11 @@ document.addEventListener('keydown', (event) => {
 
   const direction = keyMap[event.key];
   if (!direction) return;
-  event.preventDefault();
+
+  if (event.key.startsWith('Arrow')) {
+    event.preventDefault();
+  }
+
   handleMove(direction);
 });
 
