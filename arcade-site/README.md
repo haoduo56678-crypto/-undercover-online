@@ -7,6 +7,7 @@ A lightweight static mini-game website for students.
 - Snake
 - Minesweeper
 - 2048
+- Chess
 
 ## Deploy
 
