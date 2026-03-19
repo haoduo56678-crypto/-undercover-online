@@ -50,28 +50,28 @@
   }
 
   async function loadAdminContent() {
-    saveStatus.textContent = 'Loading content...';
+    saveStatus.textContent = '正在加载内容…';
     try {
       const response = await authorizedFetch('/admin-api/content');
       if (response.status === 401) {
         sessionStorage.removeItem('adminToken');
         token = '';
         setEditorVisible(false);
-        saveStatus.textContent = 'Session expired. Unlock again.';
+        saveStatus.textContent = '登录已过期，请重新解锁。';
         return;
       }
       const payload = await response.json();
-      if (!response.ok || !payload.ok) throw new Error(payload.error || 'Unable to load content.');
+      if (!response.ok || !payload.ok) throw new Error(payload.error || '无法加载内容。');
       applyContent(payload.content);
-      saveStatus.textContent = 'Loaded current file.';
+      saveStatus.textContent = '已加载当前文件内容。';
     } catch (error) {
-      saveStatus.textContent = error.message || 'Unable to load content.';
+      saveStatus.textContent = error.message || '无法加载内容。';
     }
   }
 
   loginForm.addEventListener('submit', async (event) => {
     event.preventDefault();
-    loginStatus.textContent = 'Unlocking...';
+    loginStatus.textContent = '正在解锁后台…';
     try {
       const response = await fetch('/admin-api/login', {
         method: 'POST',
@@ -79,15 +79,15 @@
         body: JSON.stringify({ password: document.getElementById('password').value })
       });
       const payload = await response.json();
-      if (!response.ok || !payload.ok) throw new Error(payload.error || 'Incorrect password.');
+      if (!response.ok || !payload.ok) throw new Error(payload.error || '密码错误。');
       token = payload.token;
       sessionStorage.setItem('adminToken', token);
       document.getElementById('password').value = '';
-      loginStatus.textContent = 'Unlocked.';
+      loginStatus.textContent = '后台已解锁。';
       setEditorVisible(true);
       await loadAdminContent();
     } catch (error) {
-      loginStatus.textContent = error.message || 'Unable to unlock admin.';
+      loginStatus.textContent = error.message || '无法解锁后台。';
     }
   });
 
@@ -98,12 +98,12 @@
     sessionStorage.removeItem('adminToken');
     setEditorVisible(false);
     saveStatus.textContent = '';
-    loginStatus.textContent = 'Admin locked.';
+    loginStatus.textContent = '后台已锁定。';
   });
 
   contentForm.addEventListener('submit', async (event) => {
     event.preventDefault();
-    saveStatus.textContent = 'Saving...';
+    saveStatus.textContent = '正在保存…';
 
     const content = {
       announcement: {
@@ -129,11 +129,11 @@
         body: JSON.stringify(content)
       });
       const payload = await response.json();
-      if (!response.ok || !payload.ok) throw new Error(payload.error || 'Unable to save content.');
+      if (!response.ok || !payload.ok) throw new Error(payload.error || '无法保存内容。');
       applyContent(payload.content);
-      saveStatus.textContent = 'Saved to content/site-content.json.';
+      saveStatus.textContent = '已保存到 content/site-content.json。';
     } catch (error) {
-      saveStatus.textContent = error.message || 'Unable to save content.';
+      saveStatus.textContent = error.message || '无法保存内容。';
     }
   });
 
@@ -141,9 +141,9 @@
     const command = 'git add content/site-content.json index.html style.css content-loader.js home-content.js admin && git commit -m "Update homepage content"';
     try {
       await navigator.clipboard.writeText(command);
-      copyStatus.textContent = 'Git command copied.';
+      copyStatus.textContent = '已复制 git 命令。';
     } catch (error) {
-      copyStatus.textContent = 'Could not copy automatically. Select it manually.';
+      copyStatus.textContent = '自动复制失败，请手动选择复制。';
     }
   });
 
