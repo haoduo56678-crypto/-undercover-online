@@ -1,20 +1,22 @@
 {
   "announcement": {
     "enabled": true,
-    "label": "New",
-    "title": "Welcome to Northfield Student Hub",
-    "body": "Use this announcement area to share school-safe updates, event notes, or quick reminders on the homepage.",
-    "linkText": "Read the rules",
+    "label": "Welcome to Northfield Student",
+    "title": "🚀 Official Launch: Student Game Hub",
+    "body": "Welcome to the Student Game Hub!\n\nThis is a website built by students for students to enjoy games during free time.\n\nMore features and games will be added soon. Stay tuned!\n\n欢迎来到学生游戏站！\n这是一个由学生搭建的网站，大家可以在空闲时间放松娱乐。\n后续会持续更新更多游戏和功能，敬请期待！",
+    "linkText": "",
     "linkUrl": "#terms"
   },
   "terms": {
     "title": "Rules and Terms",
-    "intro": "Keep the site friendly, school-appropriate, and respectful for everyone using it.",
+    "intro": "This site is designed to provide a fun, safe, and school-appropriate environment for students to enjoy games and relax during their free time. Please be respectful and follow the guidelines below.",
     "items": [
-      "Be respectful and use the site responsibly.",
-      "Do not try to break, spam, or misuse the games or feedback form.",
-      "Only share feedback that is helpful, accurate, and school-appropriate.",
-      "Teachers or the site owner may remove features or content when needed."
+      "Use the site respectfully and responsibly.",
+      "Do not attempt to hack, spam, or disrupt the platform.",
+      "Keep all interactions school-appropriate and respectful.",
+      "Only submit feedback that is helpful and appropriate.",
+      "Follow all school policies while using this site.",
+      "The site owner or school staff may remove content or restrict access if needed."
     ],
     "lastUpdated": "2026-03-19"
   }
