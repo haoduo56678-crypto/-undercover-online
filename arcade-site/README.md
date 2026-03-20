@@ -1,6 +1,6 @@
 # Northfield Student Hub
 
-A lightweight static mini-game website for students.
+A lightweight mini-game website for students.
 
 ## Included games
 
@@ -8,6 +8,8 @@ A lightweight static mini-game website for students.
 - Minesweeper
 - 2048
 - Chess
+- Undercover Fast (local single-device)
+- Undercover Online MVP (multiplayer room-based)
 
 ## Included feedback system
 
@@ -41,6 +43,27 @@ Notes:
 - The admin page writes directly to `content/site-content.json`
 - The password gate is intentionally local-only and meant for the owner using this computer
 - The public Vercel site remains static; the admin save endpoint only exists when you run the local helper
+
+## Undercover Online MVP
+
+The online Undercover game is included as a simple Express + Socket.IO MVP.
+
+Run it locally from `arcade-site`:
+
+```bash
+npm install
+npm start
+```
+
+Then open:
+
+- `http://localhost:3000/undercover-online/`
+
+Important:
+
+- the homepage and most games are still static-friendly
+- the online Undercover MVP needs a long-running Node server
+- that means it is fine for local testing or Node hosting, but not a drop-in fit for the current Vercel static/serverless setup
 
 ## Deploy
 

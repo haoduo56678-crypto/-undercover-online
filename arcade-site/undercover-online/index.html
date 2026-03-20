@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Undercover Online MVP</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="hero card">
+      <div>
+        <p class="eyebrow">Online Multiplayer Party Game</p>
+        <h1>Undercover Online</h1>
+        <p class="subtitle">Create a room, join from multiple devices, reveal secret words privately, describe in turn, vote, eliminate, and find the undercover.</p>
+      </div>
+      <div class="hero-actions">
+        <button id="reset-local-btn" class="secondary-btn" type="button">Clear Saved Nickname</button>
+      </div>
+    </header>
+
+    <main id="app"></main>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
