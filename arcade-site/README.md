@@ -67,6 +67,8 @@ Important:
 
 ## Deploy
 
+### Static site / feedback setup
+
 This site is deployed on Vercel and includes a serverless feedback endpoint.
 
 Required environment variables:
@@ -79,6 +81,26 @@ Required environment variables:
 - SMTP_FROM
 - FEEDBACK_TO
 - FEEDBACK_ALLOWED_ORIGIN
+
+### Undercover Online deployment
+
+The `undercover-online` multiplayer game uses `server.js` with Express + Socket.IO and should be deployed to a Node host such as Railway.
+
+Files included for that flow:
+
+- `server.js`
+- `package.json`
+- `railway.json`
+- `Procfile`
+
+Recommended Railway deploy flow:
+
+1. Create a new Railway project from the `arcade-site` folder/repo.
+2. Let Railway run `npm install` automatically.
+3. Start command: `npm start`
+4. Railway will inject `PORT`; the server already supports it.
+5. After deploy, open `/health` to confirm the server is alive.
+6. Open `/undercover-online/` to test the multiplayer client.
 
 ## Suggested update flow
 
