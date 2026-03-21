@@ -5,12 +5,36 @@ const path = require("path");
 
 const app = express();
 const server = http.createServer(app);
-const io = new Server(server);
 
-// 👉 静态文件（让 /undercover-online 能访问）
-app.use(express.static(path.join(__dirname)));
+const io = new Server(server, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"]
+  }
+});
 
-// 👉 简单房间逻辑（最基础联机）
+const ROOT = __dirname;
+const GAME_DIR = path.join(ROOT, "undercover-online");
+
+// 先单独托管游戏目录里的静态资源
+app.use("/undercover-online", express.static(GAME_DIR));
+
+// 根路径直接跳到游戏
+app.get("/", (req, res) => {
+  res.redirect("/undercover-online/");
+});
+
+// 明确返回游戏首页
+app.get(["/undercover-online", "/undercover-online/"], (req, res) => {
+  res.sendFile(path.join(GAME_DIR, "index.html"));
+});
+
+// 兜底：任何没匹配到的 undercover-online 路径也回首页
+app.get("/undercover-online/*", (req, res) => {
+  res.sendFile(path.join(GAME_DIR, "index.html"));
+});
+
+// ===== socket =====
 let rooms = {};
 
 io.on("connection", (socket) => {
@@ -23,20 +47,21 @@ io.on("connection", (socket) => {
       rooms[roomId] = [];
     }
 
-    rooms[roomId].push(socket.id);
+    if (!rooms[roomId].includes(socket.id)) {
+      rooms[roomId].push(socket.id);
+    }
 
     io.to(roomId).emit("updatePlayers", rooms[roomId]);
   });
 
   socket.on("disconnect", () => {
-    for (let roomId in rooms) {
+    for (const roomId in rooms) {
       rooms[roomId] = rooms[roomId].filter((id) => id !== socket.id);
       io.to(roomId).emit("updatePlayers", rooms[roomId]);
     }
   });
 });
 
-// 👉 Railway 必须用这个端口
 const PORT = process.env.PORT || 3000;
 
 server.listen(PORT, () => {
