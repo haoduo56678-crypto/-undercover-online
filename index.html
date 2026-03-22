@@ -1,18 +1,70 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
   <title>谁是卧底入口</title>
+  <style>
+    body {
+      font-family: Arial, "Microsoft YaHei", sans-serif;
+      background: #0f172a;
+      color: white;
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    h1 {
+      font-size: 40px;
+      margin-bottom: 20px;
+    }
+
+    p {
+      color: #cbd5f5;
+      margin-bottom: 30px;
+    }
+
+    .btn {
+      display: inline-block;
+      margin: 10px;
+      padding: 12px 24px;
+      background: #2563eb;
+      color: white;
+      text-decoration: none;
+      border-radius: 10px;
+      font-size: 16px;
+      transition: 0.2s;
+    }
+
+    .btn:hover {
+      background: #1d4ed8;
+    }
+
+    .disabled {
+      background: #64748b;
+      cursor: not-allowed;
+    }
+  </style>
 </head>
+
 <body>
+
   <h1>谁是卧底</h1>
+  <p>选择一个版本开始游戏</p>
 
-  <p>请选择版本：</p>
-
-  <a href="./arcade-site/index.html">进入游戏（本地版）</a><br><br>
-
-  <a href="https://undercover-game-yel4.onrender.com/undercover-online/" target="_blank">
-    联机版（暂时）
+  <!-- 本地版（你仓库里的游戏） -->
+  <a href="./arcade-site/index.html" class="btn">
+    进入游戏（本地版）
   </a>
+
+  <br>
+
+  <!-- 联机版（暂时关闭，避免死循环） -->
+  <div class="btn disabled">
+    联机版（修复中）
+  </div>
+
+  <p style="margin-top:40px;font-size:14px;color:#94a3b8;">
+    联机版正在修复中，稍后开放 🚧
+  </p>
+
 </body>
 </html>
