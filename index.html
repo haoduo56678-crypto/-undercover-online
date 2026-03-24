@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Northfield Student Hub is a browser-based mini game collection for students, featuring Snake, Minesweeper, 2048, and Chess." />
+  <meta name="description" content="Northfield Student Hub is a browser-based mini game collection for students, featuring Snake, Minesweeper, 2048, Chess, and Undercover." />
   <title>Northfield Student Hub</title>
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -53,101 +53,28 @@
       </div>
 
       <div class="games">
-        <a class="card" href="./snake/">
-          <div class="card-top">
-            <div class="icon">🐍</div>
-            <span class="pill">Keyboard Game</span>
-          </div>
+        <a class="card" href="snake/index.html">
           <h3>Snake</h3>
-          <p>Guide the snake, collect food, and keep growing without crashing into walls or yourself.</p>
-          <ul>
-            <li>Arrow Keys or WASD</li>
-            <li>Quick restart support</li>
-            <li>Best score saved locally</li>
-          </ul>
-          <span class="enter">Play Snake →</span>
+          <p>Classic Snake Game</p>
         </a>
-
-        <a class="card" href="./minesweeper/">
-          <div class="card-top">
-            <div class="icon">💣</div>
-            <span class="pill">Logic Game</span>
-          </div>
+        <a class="card" href="minesweeper/index.html">
           <h3>Minesweeper</h3>
-          <p>Use clues to reveal safe cells, place flags, and clear the board without hitting a mine.</p>
-          <ul>
-            <li>Classic 9×9 board</li>
-            <li>Right-click flagging</li>
-            <li>Helpful auto-reveal logic</li>
-          </ul>
-          <span class="enter">Play Minesweeper →</span>
+          <p>Challenge your logic skills!</p>
         </a>
-
-        <a class="card" href="./2048/">
-          <div class="card-top">
-            <div class="icon">🔢</div>
-            <span class="pill">Puzzle Game</span>
-          </div>
-          <h3>2048</h3>
-          <p>Slide matching numbers together, build bigger tiles, and try to reach the 2048 block.</p>
-          <ul>
-            <li>Arrow Keys or WASD</li>
-            <li>Touch swipe support</li>
-            <li>Score and best saved locally</li>
-          </ul>
-          <span class="enter">Play 2048 →</span>
-        </a>
-
-        <a class="card" href="./chess/">
-          <div class="card-top">
-            <div class="icon">♟️</div>
-            <span class="pill">Strategy Game</span>
-          </div>
+        <a class="card" href="chess/index.html">
           <h3>Chess</h3>
-          <p>Play classic chess in your browser with local two-player mode or three computer difficulty levels.</p>
-          <ul>
-            <li>Two Players or AI Easy/Medium/Hard</li>
-            <li>Castling, en passant, and promotion</li>
-            <li>Animated queen wiggle when under attack</li>
-          </ul>
-          <span class="enter">Play Chess →</span>
+          <p>Compete against the computer and test your wisdom.</p>
         </a>
-
-        <a class="card" href="./undercover-fast/">
-          <div class="card-top">
-            <div class="icon">🕵️</div>
-            <span class="pill">Party Game</span>
-          </div>
-          <h3>Undercover Fast</h3>
-          <p>Local single-device version for 3-8 players taking turns on one screen.</p>
-          <ul>
-            <li>Nickname setup and random word assignment</li>
-            <li>One device passed around for private reveals</li>
-            <li>Multiple voting rounds and final result</li>
-          </ul>
-          <span class="enter">Play Local Version →</span>
-        </a>
-
-        <a class="card" href="./undercover-online/">
-          <div class="card-top">
-            <div class="icon">🌐</div>
-            <span class="pill">Online MVP</span>
-          </div>
-          <h3>Undercover Online</h3>
-          <p>Create a room, join from multiple devices, reveal your own secret word, then describe and vote live together.</p>
-          <ul>
-            <li>Room code + nickname join flow</li>
-            <li>Host start control and private per-player reveal</li>
-            <li>Turn order, voting, elimination, and win rules</li>
-          </ul>
-          <span class="enter">Play Online MVP →</span>
+        <a class="card" href="#" disabled>
+          <h3>Who is the Undercover (Online Version)</h3>
+          <p>修复中</p>
         </a>
       </div>
     </section>
 
     <section class="terms-section" id="terms">
       <div class="section-head">
-        <h2 id="terms-title">Rules and Terms</h2>
+        <h2>Rules and Terms</h2>
         <p id="terms-intro"></p>
       </div>
       <div class="terms-card">
@@ -161,14 +88,12 @@
         <h2>Feedback</h2>
         <p>Students can send bug reports, suggestions, or game feedback directly from this page.</p>
       </div>
-
       <form id="feedback-form" class="feedback-form">
         <div class="form-grid">
           <label>
             <span>Name (optional)</span>
             <input type="text" name="name" maxlength="120" placeholder="Your name" />
           </label>
-
           <label>
             <span>Game</span>
             <select name="game" required>
@@ -176,10 +101,10 @@
               <option value="Minesweeper">Minesweeper</option>
               <option value="2048">2048</option>
               <option value="Chess">Chess</option>
+              <option value="Undercover Online">Undercover Online</option>
               <option value="General Website">General Website</option>
             </select>
           </label>
-
           <label>
             <span>Type</span>
             <select name="type" required>
@@ -190,12 +115,10 @@
             </select>
           </label>
         </div>
-
         <label>
           <span>Message</span>
           <textarea name="message" rows="6" maxlength="4000" required placeholder="Tell us what happened or what you would like to see improved."></textarea>
         </label>
-
         <div class="feedback-actions">
           <button class="primary-btn" type="submit">Send Feedback</button>
           <p id="feedback-status" aria-live="polite"></p>

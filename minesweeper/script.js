@@ -26,7 +26,7 @@ function createBoard() {
   seconds = 0;
   updateMinesLeft();
   timerEl.textContent = '0';
-  statusEl.textContent = 'Click any cell to begin.';
+  statusEl.textContent = 'Click any cell to begin. Right-click to flag and help identify mines.';
   stopTimer();
 
   for (let row = 0; row < ROWS; row++) {

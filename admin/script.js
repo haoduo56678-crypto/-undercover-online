@@ -121,7 +121,6 @@
         lastUpdated: fields.termsLastUpdated.value
       }
     };
-
     try {
       const response = await authorizedFetch('/admin-api/content', {
         method: 'POST',

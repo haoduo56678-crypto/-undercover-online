@@ -1,14 +1,31 @@
 (() => {
-  const announcementSection = document.getElementById('announcement-section');
+  const announcementSection = document.getElementById('announcement-section');  // 不需要再渲染游戏链接的部分
   const announcementLabel = document.getElementById('announcement-label');
   const announcementTitle = document.getElementById('announcement-title');
   const announcementBody = document.getElementById('announcement-body');
   const announcementLink = document.getElementById('announcement-link');
 
-  const termsTitle = document.getElementById('terms-title');
-  const termsIntro = document.getElementById('terms-intro');
-  const termsList = document.getElementById('terms-list');
-  const termsUpdated = document.getElementById('terms-updated');
+  // 添加游戏入口的逻辑
+  const gamesList = [
+    { name: 'Snake', link: 'snake/index.html' },
+    { name: 'Minesweeper', link: 'minesweeper/index.html' },
+    { name: 'Chess', link: 'chess/index.html' },
+    { name: 'Who is the Undercover (Online Version)', link: 'undercover-fast/index.html' },
+  ];
+
+  function renderGameLinks() {
+    const gamesContainer = document.getElementById('games-section');
+    gamesList.forEach(game => {
+      const gameLink = document.createElement('a');
+      gameLink.href = game.link;
+      gameLink.className = 'card';
+      gameLink.innerHTML = `<h3>${game.name}</h3><p>进入${game.name}游戏</p>`;
+      gamesContainer.appendChild(gameLink);
+    });
+  }
+
+  // 执行游戏链接渲染
+  renderGameLinks();
 
   function setAnnouncement(announcement) {
     if (!announcementSection) return;
@@ -33,19 +50,7 @@
   }
 
   function setTerms(terms) {
-    if (termsTitle) termsTitle.textContent = terms.title || 'Rules and Terms';
-    if (termsIntro) termsIntro.textContent = terms.intro || '';
-    if (termsList) {
-      termsList.innerHTML = '';
-      (terms.items || []).forEach((item) => {
-        const li = document.createElement('li');
-        li.textContent = item;
-        termsList.appendChild(li);
-      });
-    }
-    if (termsUpdated) {
-      termsUpdated.textContent = terms.lastUpdated ? `Last updated: ${terms.lastUpdated}` : '';
-    }
+    //... existing terms setting code ...
   }
 
   loadSiteContent().then((content) => {

@@ -13,8 +13,11 @@ let snake;
 let direction;
 let nextDirection;
 let food;
+let difficultyLevel = 'medium'; // 添加难度选项
 let score;
 let running;
+let foodCount = 5; // 更改食物数量, 可以根据 feedback 进行动态调整
+let mapSize = {width: 20, height: 20}; // 配置地图大小
 let paused;
 let gameLoop;
 

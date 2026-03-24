@@ -1,6 +1,6 @@
 const SIZE = 4;
-const MOVE_DURATION = 120;
-const SPAWN_DELAY = 16;
+const MOVE_DURATION = 150;
+const SPAWN_DELAY = 40;
 const boardEl = document.getElementById('board');
 const scoreEl = document.getElementById('score');
 const bestEl = document.getElementById('best');
@@ -94,16 +94,20 @@ function keyOf(r, c) {
   return `${r}-${c}`;
 }
 
-function setTilePosition(tile, r, c) {
-  tile.style.setProperty('--tile-x', String(c));
-  tile.style.setProperty('--tile-y', String(r));
+function positionFor(r, c) {
+  return {
+    x: `calc(${c} * ((100% - 30px) / 4) + ${c} * 10px)`,
+    y: `calc(${r} * ((100% - 30px) / 4) + ${r} * 10px)`
+  };
 }
 
 function buildTile(value, r, c, extraClasses = []) {
   const tile = document.createElement('div');
   tile.className = ['tile', `v${value}`, ...extraClasses].join(' ');
   tile.textContent = String(value);
-  setTilePosition(tile, r, c);
+  const { x, y } = positionFor(r, c);
+  tile.style.left = x;
+  tile.style.top = y;
   return tile;
 }
 
@@ -111,9 +115,8 @@ function renderBoard(grid, { newTiles = [], mergedTiles = [], hiddenTiles = [] }
   const newSet = new Set(newTiles);
   const mergedSet = new Set(mergedTiles);
   const hiddenSet = new Set(hiddenTiles);
-  const fragment = document.createDocumentFragment();
 
-  tileLayerEl.replaceChildren();
+  tileLayerEl.innerHTML = '';
   for (let r = 0; r < SIZE; r++) {
     for (let c = 0; c < SIZE; c++) {
       const value = grid[r][c];
@@ -123,11 +126,9 @@ function renderBoard(grid, { newTiles = [], mergedTiles = [], hiddenTiles = [] }
       if (newSet.has(key)) classes.push('tile-new');
       if (mergedSet.has(key)) classes.push('tile-merged');
       if (hiddenSet.has(key)) classes.push('tile-hidden');
-      fragment.appendChild(buildTile(value, r, c, classes));
+      tileLayerEl.appendChild(buildTile(value, r, c, classes));
     }
   }
-
-  tileLayerEl.appendChild(fragment);
 }
 
 function processLine(cells) {
@@ -233,23 +234,21 @@ function animateMove(oldBoard, nextBoard, moves, mergeTargets, spawnedTile) {
 
   const overlay = document.createElement('div');
   overlay.className = 'tile-overlay';
-  const fragment = document.createDocumentFragment();
 
   for (const move of moves) {
     if (!move.value) continue;
     const tile = buildTile(move.value, move.from.r, move.from.c, ['tile-moving']);
-    tile.style.setProperty('--move-x', String(move.to.c - move.from.c));
-    tile.style.setProperty('--move-y', String(move.to.r - move.from.r));
-    fragment.appendChild(tile);
+    const deltaX = move.to.c - move.from.c;
+    const deltaY = move.to.r - move.from.r;
+    tile.style.setProperty('--move-x', `calc(${deltaX} * ((100% - 30px) / 4) + ${deltaX} * 10px)`);
+    tile.style.setProperty('--move-y', `calc(${deltaY} * ((100% - 30px) / 4) + ${deltaY} * 10px)`);
+    overlay.appendChild(tile);
   }
 
-  overlay.appendChild(fragment);
   boardEl.appendChild(overlay);
 
   requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      overlay.querySelectorAll('.tile-moving').forEach(tile => tile.classList.add('is-moving'));
-    });
+    overlay.querySelectorAll('.tile-moving').forEach(tile => tile.classList.add('is-moving'));
   });
 
   window.setTimeout(() => {
